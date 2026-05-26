@@ -11,6 +11,14 @@ function getFirstDigit(num) {
 }
 
 // №2 Дано число. Выведите в консоль последнюю цифру этого числа.
+function getLastDigit(num) {
+  if (typeof num !== "number" || !Number.isFinite(num)) {
+    throw new TypeError("Аргумент не число (не тип number)");
+  }
+
+  const clear = num.toString().replace(/[-,.]/, "");
+  return Number(clear.slice(-1));
+}
 
 // №3 Дано число. Выведите в консоль сумму первой и последней цифры этого числа.
 
@@ -20,4 +28,5 @@ function getFirstDigit(num) {
 
 module.exports = {
   getFirstDigit,
+  getLastDigit,
 };
