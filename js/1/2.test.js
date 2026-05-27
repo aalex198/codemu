@@ -1,4 +1,4 @@
-const { getFirstDigit, getLastDigit } = require("./2");
+const { getFirstDigit, getLastDigit, getSumFirstAndLastDigit } = require("./2");
 
 describe("Функция getFirstDigit", () => {
   test("Отрицательное", () => {
@@ -66,5 +66,52 @@ describe("Функция getLastDigit", () => {
     expect(() => getLastDigit({})).toThrow(TypeError);
     expect(() => getLastDigit([])).toThrow(TypeError);
     expect(() => getLastDigit(Infinity)).toThrow(TypeError);
+  });
+});
+
+describe("Функция getLastDigit", () => {
+  test("Положительне", () => {
+    expect(getSumFirstAndLastDigit(12)).toBe(3);
+  });
+  test("Большое Положительне", () => {
+    expect(getSumFirstAndLastDigit(5738369)).toBe(14);
+  });
+  test("Отрицательное", () => {
+    expect(getSumFirstAndLastDigit(-12)).toBe(3);
+  });
+  test("Большое Отрицательное", () => {
+    expect(getSumFirstAndLastDigit(-5738369)).toBe(14);
+  });
+  test("Ноль", () => {
+    expect(getSumFirstAndLastDigit(0)).toBe(0);
+  });
+  test("Однозначное Положительное", () => {
+    expect(getSumFirstAndLastDigit(4)).toBe(4);
+  });
+  test("Однозначное Отрицательное", () => {
+    expect(getSumFirstAndLastDigit(-4)).toBe(4);
+  });
+  test("Дробное положительное", () => {
+    expect(getSumFirstAndLastDigit(11.33)).toBe(4);
+  });
+  test("Дробное отрицательное", () => {
+    expect(getSumFirstAndLastDigit(-21.35)).toBe(7);
+  });
+  test("Дробное с нулем", () => {
+    expect(getSumFirstAndLastDigit(0.35)).toBe(5);
+  });
+  test("Дробное отрицательное с нулем", () => {
+    expect(getSumFirstAndLastDigit(-0.1)).toBe(1);
+  });
+  test("Аргумент не число (не тип number)", () => {
+    expect(() => getSumFirstAndLastDigit("")).toThrow(TypeError);
+    expect(() => getSumFirstAndLastDigit("12")).toThrow(TypeError);
+    expect(() => getSumFirstAndLastDigit("ss")).toThrow(TypeError);
+    expect(() => getSumFirstAndLastDigit(null)).toThrow(TypeError);
+    expect(() => getSumFirstAndLastDigit()).toThrow(TypeError);
+    expect(() => getSumFirstAndLastDigit(NaN)).toThrow(TypeError);
+    expect(() => getSumFirstAndLastDigit({})).toThrow(TypeError);
+    expect(() => getSumFirstAndLastDigit([])).toThrow(TypeError);
+    expect(() => getSumFirstAndLastDigit(Infinity)).toThrow(TypeError);
   });
 });
