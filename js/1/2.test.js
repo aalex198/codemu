@@ -1,4 +1,10 @@
-const { getFirstDigit, getLastDigit, getSumFirstAndLastDigit, getDigitsCount } = require("./2");
+const {
+  getFirstDigit,
+  getLastDigit,
+  getSumFirstAndLastDigit,
+  getDigitsCount,
+  haveSameFirstDigit,
+} = require("./2");
 
 describe("Функция getFirstDigit", () => {
   test("Отрицательное", () => {
@@ -148,5 +154,38 @@ describe("Функция getDigitsCount", () => {
     expect(() => getDigitsCount({})).toThrow(TypeError);
     expect(() => getDigitsCount([])).toThrow(TypeError);
     expect(() => getDigitsCount(Infinity)).toThrow(TypeError);
+  });
+});
+
+describe("Функция haveSameFirstDigit", () => {
+  test("Ноль", () => {
+    expect(haveSameFirstDigit(0, 0)).toBe(true);
+  });
+  test("Ноль и 1", () => {
+    expect(haveSameFirstDigit(0, 1)).toBe(false);
+  });
+  test("Ноль и -1", () => {
+    expect(haveSameFirstDigit(0, -1)).toBe(false);
+  });
+  test("Дробные", () => {
+    expect(haveSameFirstDigit(0.12, 11)).toBe(false);
+  });
+  test("Дробные", () => {
+    expect(haveSameFirstDigit(51, 569423432)).toBe(true);
+  });
+  test("Дробные", () => {
+    expect(haveSameFirstDigit(51, -569423432)).toBe(true);
+  });
+
+  test("Аргумент не число (не тип number)", () => {
+    expect(() => haveSameFirstDigit("")).toThrow(TypeError);
+    expect(() => haveSameFirstDigit("12")).toThrow(TypeError);
+    expect(() => haveSameFirstDigit("ss")).toThrow(TypeError);
+    expect(() => haveSameFirstDigit(null)).toThrow(TypeError);
+    expect(() => haveSameFirstDigit()).toThrow(TypeError);
+    expect(() => haveSameFirstDigit(NaN)).toThrow(TypeError);
+    expect(() => haveSameFirstDigit({})).toThrow(TypeError);
+    expect(() => haveSameFirstDigit([])).toThrow(TypeError);
+    expect(() => haveSameFirstDigit(Infinity)).toThrow(TypeError);
   });
 });

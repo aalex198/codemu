@@ -46,10 +46,21 @@ function getDigitsCount(num) {
 }
 
 // №5 Даны два числа. Проверьте, что первые цифры этих чисел совпадают.
+function haveSameFirstDigit(firstNum, secondNum) {
+  if (typeof firstNum !== "number" || !Number.isFinite(firstNum)) {
+    throw new TypeError(`Первый аргумент имеет тип данных не 'number', а '${typeof firstNum}'`);
+  }
+  if (typeof secondNum !== "number" || !Number.isFinite(secondNum)) {
+    throw new TypeError(`Второе число имеет тип данных не 'number', а '${typeof secondNum}'`);
+  }
+
+  return String(Math.abs(firstNum))[0] === String(Math.abs(secondNum))[0];
+}
 
 module.exports = {
   getFirstDigit,
   getLastDigit,
   getSumFirstAndLastDigit,
   getDigitsCount,
+  haveSameFirstDigit,
 };
