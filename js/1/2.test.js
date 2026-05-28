@@ -1,4 +1,4 @@
-const { getFirstDigit, getLastDigit, getSumFirstAndLastDigit } = require("./2");
+const { getFirstDigit, getLastDigit, getSumFirstAndLastDigit, getDigitsCount } = require("./2");
 
 describe("Функция getFirstDigit", () => {
   test("Отрицательное", () => {
@@ -69,7 +69,7 @@ describe("Функция getLastDigit", () => {
   });
 });
 
-describe("Функция getLastDigit", () => {
+describe("Функция getSumFirstAndLastDigit", () => {
   test("Положительне", () => {
     expect(getSumFirstAndLastDigit(12)).toBe(3);
   });
@@ -113,5 +113,40 @@ describe("Функция getLastDigit", () => {
     expect(() => getSumFirstAndLastDigit({})).toThrow(TypeError);
     expect(() => getSumFirstAndLastDigit([])).toThrow(TypeError);
     expect(() => getSumFirstAndLastDigit(Infinity)).toThrow(TypeError);
+  });
+});
+
+describe("Функция getDigitsCount", () => {
+  test("Ноль", () => {
+    expect(getDigitsCount(0)).toBe(1);
+  });
+  test("Положительне однозначное", () => {
+    expect(getDigitsCount(1)).toBe(1);
+  });
+  test("Положительне двузначное", () => {
+    expect(getDigitsCount(12)).toBe(2);
+  });
+  test("Положительне большое", () => {
+    expect(getDigitsCount(928564)).toBe(6);
+  });
+  test("Отрицательное однозначное", () => {
+    expect(getDigitsCount(-1)).toBe(1);
+  });
+  test("Отрицательное двузначное", () => {
+    expect(getDigitsCount(-12)).toBe(2);
+  });
+  test("Положительне большое", () => {
+    expect(getDigitsCount(-928564)).toBe(6);
+  });
+  test("Аргумент не число (не тип number)", () => {
+    expect(() => getDigitsCount("")).toThrow(TypeError);
+    expect(() => getDigitsCount("12")).toThrow(TypeError);
+    expect(() => getDigitsCount("ss")).toThrow(TypeError);
+    expect(() => getDigitsCount(null)).toThrow(TypeError);
+    expect(() => getDigitsCount()).toThrow(TypeError);
+    expect(() => getDigitsCount(NaN)).toThrow(TypeError);
+    expect(() => getDigitsCount({})).toThrow(TypeError);
+    expect(() => getDigitsCount([])).toThrow(TypeError);
+    expect(() => getDigitsCount(Infinity)).toThrow(TypeError);
   });
 });

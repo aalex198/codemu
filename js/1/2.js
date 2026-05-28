@@ -37,6 +37,13 @@ function getSumFirstAndLastDigit(num) {
 }
 
 // №4 Дано число. Выведите количество цифр в этом числе.
+function getDigitsCount(num) {
+  if (typeof num !== "number" || !Number.isFinite(num)) {
+    throw new TypeError(`Аргумент "${num}" должен быть числом. Пришедший тип - "${typeof num}"`);
+  }
+
+  return Math.abs(num).toString().length;
+}
 
 // №5 Даны два числа. Проверьте, что первые цифры этих чисел совпадают.
 
@@ -44,4 +51,5 @@ module.exports = {
   getFirstDigit,
   getLastDigit,
   getSumFirstAndLastDigit,
+  getDigitsCount,
 };
