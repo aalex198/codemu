@@ -1,4 +1,4 @@
-const { logsOneHundred } = require("./4.js");
+const { logsOneHundred, fromNegativeOneHundredToZero } = require("./4.js");
 
 describe("logsOneHundred", () => {
   let consoleSpy;
@@ -26,6 +26,38 @@ describe("logsOneHundred", () => {
 
     for (let i = 0; i < 100; i++) {
       expect(allCalls[i][0]).toBe(i + 1);
+    }
+  });
+});
+
+describe("fromNegativeOneHundredToZero", () => {
+  let consoleSpy;
+
+  beforeEach(() => {
+    consoleSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    consoleSpy.mockRestore();
+  });
+
+  test("выводит числа от -100 до 0", () => {
+    fromNegativeOneHundredToZero();
+
+    expect(consoleSpy).toHaveBeenCalledTimes(101);
+    expect(consoleSpy).toHaveBeenNthCalledWith(1, -100);
+    expect(consoleSpy).toHaveBeenNthCalledWith(101, 0);
+    expect(consoleSpy).toHaveBeenNthCalledWith(51, -50);
+  });
+
+  test("выводит корректную последовательность", () => {
+    fromNegativeOneHundredToZero();
+
+    const allCalls = consoleSpy.mock.calls;
+
+    for (let i = 0; i < 101; i++) {
+      const expectedValue = -100 + i;
+      expect(allCalls[i][0]).toBe(expectedValue);
     }
   });
 });
