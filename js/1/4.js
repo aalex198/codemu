@@ -23,8 +23,40 @@ function logsDigitsFromOneHangredToOne() {
   } while (i >= 1);
 }
 // №4 Выведите в консоль все четные числа из промежутка от 1 до 100.
-// рекурсией
+function getAllEvenNumbers(fromDigit, toDigit) {
+  if (typeof fromDigit !== "number" || !Number.isFinite(fromDigit)) {
+    throw new TypeError(
+      `Аргумент '${fromDigit}' не является числом по типу данных. Его тип определен как - '${typeof fromDigit}'`
+    );
+  }
+
+  if (typeof toDigit !== "number" || !Number.isFinite(toDigit)) {
+    throw new TypeError(
+      `Аргумент '${toDigit}' не является числом по типу данных. Его тип определен как - '${typeof toDigit}'`
+    );
+  }
+
+  if (fromDigit >= toDigit) {
+    throw new Error(`Первый аргумент '${fromDigit}' должен быть меньше второго '${toDigit}'`);
+  }
+
+  let result = [];
+
+  for (let i = fromDigit; i <= toDigit; i++) {
+    if (i % 2 === 0) {
+      result.push(i);
+    }
+  }
+
+  return result;
+}
 
 // №5 Выведите в консоль все числа кратные трем в промежутке от 1 до 100.
+// рекурсией
 
-module.exports = { logsOneHundred, fromNegativeOneHundredToZero, logsDigitsFromOneHangredToOne };
+module.exports = {
+  logsOneHundred,
+  fromNegativeOneHundredToZero,
+  logsDigitsFromOneHangredToOne,
+  getAllEvenNumbers,
+};
