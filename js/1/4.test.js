@@ -108,6 +108,25 @@ describe("getAllEvenNumbers", () => {
     expect(getAllEvenNumbers(4, 5)).toEqual([4]);
   });
 
+  test("Отрицательные числа тоже работают", () => {
+    expect(() => getAllEvenNumbers(-10, -1)).not.toThrow(); // ошибки нет
+    expect(getAllEvenNumbers(-10, -1)).toEqual([-10, -8, -6, -4, -2]);
+  });
+
+  test("Второй аргумент меньше первого — выбрасывает ошибку", () => {
+    expect(() => getAllEvenNumbers(10, 1)).toThrow(Error);
+    expect(() => getAllEvenNumbers(10, 1)).toThrow(
+      "Первый аргумент '10' должен быть меньше второго '1'"
+    );
+  });
+
+  test("Аргументы равны — выбрасывает ошибку", () => {
+    expect(() => getAllEvenNumbers(5, 5)).toThrow(Error);
+    expect(() => getAllEvenNumbers(5, 5)).toThrow(
+      "Первый аргумент '5' должен быть меньше второго '5'"
+    );
+  });
+
   test("Передано не число — выбрасывает ошибку", () => {
     expect(() => getAllEvenNumbers("0")).toThrow(TypeError);
     expect(() => getAllEvenNumbers("")).toThrow(TypeError);
