@@ -70,15 +70,20 @@ function filterMultiplesOfThree(min, max) {
 
   let result = [];
 
-  for (let i = min; i <= max; i++) {
-    if (i % 3 === 0) {
-      result.push(i);
+  function recursivePush(min, max) {
+    if (min > max) {
+      return result;
     }
+
+    if (min % 3 === 0) {
+      result.push(min);
+    }
+
+    return recursivePush(min + 1, max);
   }
 
-  return result;
+  return recursivePush(min, max, result);
 }
-// рекурсией
 
 module.exports = {
   logsOneHundred,
