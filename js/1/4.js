@@ -52,6 +52,32 @@ function getAllEvenNumbers(fromDigit, toDigit) {
 }
 
 // №5 Выведите в консоль все числа кратные трем в промежутке от 1 до 100.
+function filterMultiplesOfThree(min, max) {
+  if (typeof min !== "number" || !Number.isFinite(min)) {
+    throw new TypeError(
+      `аргумет '${min}' не является числом по типу данных. Его тип - '${typeof min}'`
+    );
+  }
+  if (typeof max !== "number" || !Number.isFinite(max)) {
+    throw new TypeError(
+      `аргумет '${max}' не является числом по типу данных. Его тип - '${typeof max}'`
+    );
+  }
+
+  if (min >= max) {
+    throw new Error(`Некорректный диапазон! число '${min}' должен быть меньше числа '${max}'`);
+  }
+
+  let result = [];
+
+  for (let i = min; i <= max; i++) {
+    if (i % 3 === 0) {
+      result.push(i);
+    }
+  }
+
+  return result;
+}
 // рекурсией
 
 module.exports = {
@@ -59,4 +85,5 @@ module.exports = {
   fromNegativeOneHundredToZero,
   logsDigitsFromOneHangredToOne,
   getAllEvenNumbers,
+  filterMultiplesOfThree,
 };

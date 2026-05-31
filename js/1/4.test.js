@@ -3,6 +3,7 @@ const {
   fromNegativeOneHundredToZero,
   logsDigitsFromOneHangredToOne,
   getAllEvenNumbers,
+  filterMultiplesOfThree,
 } = require("./4.js");
 
 describe("logsOneHundred", () => {
@@ -109,7 +110,7 @@ describe("getAllEvenNumbers", () => {
   });
 
   test("Отрицательные числа тоже работают", () => {
-    expect(() => getAllEvenNumbers(-10, -1)).not.toThrow(); // ошибки нет
+    expect(() => getAllEvenNumbers(-10, -1)).not.toThrow();
     expect(getAllEvenNumbers(-10, -1)).toEqual([-10, -8, -6, -4, -2]);
   });
 
@@ -143,5 +144,54 @@ describe("getAllEvenNumbers", () => {
     expect(() => getAllEvenNumbers([])).toThrow(TypeError);
     expect(() => getAllEvenNumbers(NaN)).toThrow(TypeError);
     expect(() => getAllEvenNumbers(Infinity)).toThrow(TypeError);
+  });
+});
+
+describe("filterMultiplesOfThree", () => {
+  test("Возвращает массив всех чисел кратных трем из промежутка", () => {
+    expect(filterMultiplesOfThree(1, 10)).toEqual([3, 6, 9]);
+    expect(filterMultiplesOfThree(2, 10)).toEqual([3, 6, 9]);
+    expect(filterMultiplesOfThree(3, 9)).toEqual([3, 6, 9]);
+    expect(filterMultiplesOfThree(5, 6)).toEqual([6]);
+    expect(filterMultiplesOfThree(4, 5)).toEqual([]);
+  });
+
+  test("Отрицательные числа тоже работают", () => {
+    expect(() => filterMultiplesOfThree(-10, -1)).not.toThrow();
+    expect(filterMultiplesOfThree(-10, -1)).toEqual([-9, -6, -3]);
+  });
+
+  test("Второй аргумент меньше первого — выбрасывает ошибку", () => {
+    expect(() => filterMultiplesOfThree(10, 1)).toThrow(Error);
+    expect(() => filterMultiplesOfThree(10, 1)).toThrow(
+      "Некорректный диапазон! число '10' должен быть меньше числа '1'"
+    );
+  });
+
+  test("Аргументы равны — выбрасывает ошибку", () => {
+    expect(() => filterMultiplesOfThree(5, 5)).toThrow(Error);
+    expect(() => filterMultiplesOfThree(5, 5)).toThrow(
+      "Некорректный диапазон! число '5' должен быть меньше числа '5'"
+    );
+  });
+
+  test("Передано не число — выбрасывает ошибку", () => {
+    expect(() => filterMultiplesOfThree("0")).toThrow(
+      `аргумет '0' не является числом по типу данных. Его тип - 'string'`
+    );
+    expect(() => filterMultiplesOfThree("")).toThrow(TypeError);
+    expect(() => filterMultiplesOfThree("abc")).toThrow(TypeError);
+
+    expect(() => filterMultiplesOfThree(1)).toThrow(TypeError);
+    expect(() => filterMultiplesOfThree(undefined, 1)).toThrow(TypeError);
+    expect(() => filterMultiplesOfThree(1, NaN)).toThrow(TypeError);
+    expect(() => filterMultiplesOfThree(1, "123")).toThrow(TypeError);
+
+    expect(() => filterMultiplesOfThree(null)).toThrow(TypeError);
+    expect(() => filterMultiplesOfThree()).toThrow(TypeError);
+    expect(() => filterMultiplesOfThree({})).toThrow(TypeError);
+    expect(() => filterMultiplesOfThree([])).toThrow(TypeError);
+    expect(() => filterMultiplesOfThree(NaN)).toThrow(TypeError);
+    expect(() => filterMultiplesOfThree(Infinity)).toThrow(TypeError);
   });
 });
