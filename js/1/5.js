@@ -24,6 +24,27 @@ function sumRange(start, end) {
 }
 
 // №2 Найдите сумму всех целых четных чисел в промежутке от 1 до 100.
+function sumOfEvenNumbers(start, end) {
+  if (typeof start !== "number" || !Number.isFinite(start)) {
+    throw new TypeError(`start должен быть числом, получено: ${start}`);
+  }
+  if (typeof end !== "number" || !Number.isFinite(end)) {
+    throw new TypeError(`end должен быть числом, получено: ${end}`);
+  }
+  if (start > end) {
+    throw new Error(`start (${start}) должен быть <= end (${end})`);
+  }
+
+  let result = 0;
+
+  for (let i = start; i <= end; i++) {
+    if (i % 2 === 0) {
+      result += i;
+    }
+  }
+
+  return result;
+}
 
 // №3 Найдите сумму всех целых нечетных чисел в промежутке от 1 до 100.
 
@@ -31,4 +52,4 @@ function sumRange(start, end) {
 
 // №5 Дана некоторая строка. Переберите и выведите в консоль по очереди все символы с конца строки.
 
-module.exports = { sumRange };
+module.exports = { sumRange, sumOfEvenNumbers };
