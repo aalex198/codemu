@@ -1,4 +1,10 @@
-const { sumRange, sumOfEvenNumbers, sumOfNoEvenNumbers, getRemainder } = require("./5.js");
+const {
+  sumRange,
+  sumOfEvenNumbers,
+  sumOfNoEvenNumbers,
+  getRemainder,
+  printLastCharsReverse,
+} = require("./5.js");
 
 describe("sumRange", () => {
   test("Тип данных первого аргумента", () => {
@@ -170,5 +176,44 @@ describe("getRemainder", () => {
     testCases.forEach(([dividend, divisor, expected]) => {
       expect(getRemainder(dividend, divisor)).toBe(expected);
     });
+  });
+});
+
+describe("printLastCharsReverse", () => {
+  let consoleSpy;
+
+  beforeEach(() => {
+    consoleSpy = jest.spyOn(console, "log").mockImplementation(() => {});
+  });
+
+  afterEach(() => {
+    consoleSpy.mockRestore();
+  });
+
+  test("выводит все символы в обратном порядке", () => {
+    printLastCharsReverse("abc");
+
+    expect(consoleSpy).toHaveBeenCalledTimes(3); // ✅ было 2, стало 3
+    expect(consoleSpy).toHaveBeenNthCalledWith(1, "c");
+    expect(consoleSpy).toHaveBeenNthCalledWith(2, "b");
+    expect(consoleSpy).toHaveBeenNthCalledWith(3, "a"); // ✅ добавили проверку "a"
+  });
+
+  test("строка из одного символа — выводит этот символ", () => {
+    // ✅ исправлено
+    printLastCharsReverse("a");
+    expect(consoleSpy).toHaveBeenCalledTimes(1);
+    expect(consoleSpy).toHaveBeenCalledWith("a");
+  });
+
+  test("пустая строка — ничего не выводит", () => {
+    printLastCharsReverse("");
+    expect(consoleSpy).not.toHaveBeenCalled();
+  });
+
+  test("передано не строка — выбрасывает ошибку", () => {
+    expect(() => printLastCharsReverse(123)).toThrow(TypeError);
+    expect(() => printLastCharsReverse(null)).toThrow(TypeError);
+    expect(() => printLastCharsReverse()).toThrow(TypeError);
   });
 });

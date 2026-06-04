@@ -87,5 +87,19 @@ function getRemainder(dividend, divisor) {
 }
 
 // №5 Дана некоторая строка. Переберите и выведите в консоль по очереди все символы с конца строки.
+function printLastCharsReverse(str) {
+  if (typeof str !== "string") {
+    throw new TypeError(`Аргумент '${str}' не являетя строкой. Его тип - '${typeof str}'`);
+  }
+  for (let i = str.length - 1; i >= 0; i--) {
+    console.log(str[i]);
+  }
+}
 
-module.exports = { sumRange, sumOfEvenNumbers, sumOfNoEvenNumbers, getRemainder };
+module.exports = {
+  sumRange,
+  sumOfEvenNumbers,
+  sumOfNoEvenNumbers,
+  getRemainder,
+  printLastCharsReverse,
+};
