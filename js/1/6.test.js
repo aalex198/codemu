@@ -1,4 +1,4 @@
-const { sumOfSquares } = require("./6.js");
+const { sumOfSquares, getSumOfSquareRoots } = require("./6.js");
 
 describe("sumOfSquares", () => {
   test("обычные числа", () => {
@@ -24,5 +24,32 @@ describe("sumOfSquares", () => {
 
   test("не массив — ошибка", () => {
     expect(() => sumOfSquares("not array")).toThrow(TypeError);
+  });
+});
+
+describe("getSumOfSquareRoots", () => {
+  test("обычные числа", () => {
+    expect(getSumOfSquareRoots([4, 9, 16])).toBe(9);
+    expect(getSumOfSquareRoots([1, 4, 9])).toBe(6);
+  });
+
+  test("пустой массив", () => {
+    expect(getSumOfSquareRoots([])).toBe(0);
+  });
+
+  test("ноль", () => {
+    expect(getSumOfSquareRoots([0, 4])).toBe(2);
+  });
+
+  test("отрицательное число — ошибка", () => {
+    expect(() => getSumOfSquareRoots([4, -9])).toThrow(Error);
+  });
+
+  test("не массив — ошибка", () => {
+    expect(() => getSumOfSquareRoots("abc")).toThrow(TypeError);
+  });
+
+  test("не число в массиве — ошибка", () => {
+    expect(() => getSumOfSquareRoots([4, "abc"])).toThrow(TypeError);
   });
 });
