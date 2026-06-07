@@ -1,4 +1,4 @@
-const { sumOfSquares, getSumOfSquareRoots } = require("./6.js");
+const { sumOfSquares, getSumOfSquareRoots, summAllNaturalNumbers } = require("./6.js");
 
 describe("sumOfSquares", () => {
   test("обычные числа", () => {
@@ -51,5 +51,35 @@ describe("getSumOfSquareRoots", () => {
 
   test("не число в массиве — ошибка", () => {
     expect(() => getSumOfSquareRoots([4, "abc"])).toThrow(TypeError);
+  });
+});
+
+describe("summAllNaturalNumbers", () => {
+  test("обычные числа", () => {
+    expect(summAllNaturalNumbers([4, -9, 16])).toBe(20);
+    expect(summAllNaturalNumbers([-1, 4, 9])).toBe(13);
+  });
+
+  test("пустой массив", () => {
+    expect(summAllNaturalNumbers([])).toBe(0);
+  });
+
+  test("ноль", () => {
+    expect(summAllNaturalNumbers([0, 4])).toBe(4);
+  });
+
+  test("отрицательное число", () => {
+    expect(summAllNaturalNumbers([4, -9])).toBe(4);
+  });
+
+  test("не массив — ошибка", () => {
+    expect(() => summAllNaturalNumbers("abc")).toThrow(TypeError);
+  });
+
+  test("не число в массиве — ошибка", () => {
+    expect(() => summAllNaturalNumbers([4, "abc"])).toThrow(TypeError);
+  });
+  test("не число в массиве — ошибка", () => {
+    expect(() => summAllNaturalNumbers([Infinity, 22])).toThrow(TypeError);
   });
 });

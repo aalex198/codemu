@@ -37,7 +37,24 @@ function getSumOfSquareRoots(numbers) {
 }
 
 // №3 Дан массив с числами. Найдите сумму положительных элементов этого массива.
+function summAllNaturalNumbers(numbers) {
+  if (!Array.isArray(numbers)) {
+    throw new TypeError("Аргумент должен быть массивом");
+  }
+
+  return numbers.reduce((sum, number, array) => {
+    if (typeof number !== "number" || !Number.isFinite(number)) {
+      throw new TypeError(`Элемент '${number}' массива '${array}' не является числом`);
+    }
+
+    if (number > 0) {
+      sum += number;
+    }
+
+    return sum;
+  }, 0);
+}
 
 // №4 Дан массив с числами. Найдите сумму тех элементов этого массива, которые больше нуля и меньше десяти.
 
-module.exports = { sumOfSquares, getSumOfSquareRoots };
+module.exports = { sumOfSquares, getSumOfSquareRoots, summAllNaturalNumbers };
