@@ -56,5 +56,12 @@ function summAllNaturalNumbers(numbers) {
 }
 
 // №4 Дан массив с числами. Найдите сумму тех элементов этого массива, которые больше нуля и меньше десяти.
+function getSumOfRange(numbers) {
+  return numbers
+    .filter(number => {
+      return number > 0 && 10 > number;
+    })
+    .reduce((sum, num) => sum + num, 0);
+}
 
-module.exports = { sumOfSquares, getSumOfSquareRoots, summAllNaturalNumbers };
+module.exports = { sumOfSquares, getSumOfSquareRoots, summAllNaturalNumbers, getSumOfRange };

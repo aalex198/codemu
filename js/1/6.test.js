@@ -1,4 +1,9 @@
-const { sumOfSquares, getSumOfSquareRoots, summAllNaturalNumbers } = require("./6.js");
+const {
+  sumOfSquares,
+  getSumOfSquareRoots,
+  summAllNaturalNumbers,
+  getSumOfRange,
+} = require("./6.js");
 
 describe("sumOfSquares", () => {
   test("обычные числа", () => {
@@ -81,5 +86,30 @@ describe("summAllNaturalNumbers", () => {
   });
   test("не число в массиве — ошибка", () => {
     expect(() => summAllNaturalNumbers([Infinity, 22])).toThrow(TypeError);
+  });
+});
+
+describe("getSumOfRange", () => {
+  test("должен складывать числа в диапазоне от 0 до 10 (не включая границы)", () => {
+    expect(getSumOfRange([1, 2, 3])).toBe(6);
+    expect(getSumOfRange([4, -9, 5, 16])).toBe(9); // 4 + 5 = 9
+    expect(getSumOfRange([-1, 4, 9])).toBe(13); // 4 + 9 = 13
+  });
+
+  test("не должен включать граничные значения (0 и 10)", () => {
+    // Согласно вашему условию number > 0 && 10 > number
+    expect(getSumOfRange([0, 5, 10])).toBe(5);
+  });
+
+  test("должен возвращать 0 для пустого массива", () => {
+    expect(getSumOfRange([])).toBe(0);
+  });
+
+  test("должен возвращать 0, если нет подходящих чисел", () => {
+    expect(getSumOfRange([-5, -1, 12, 20])).toBe(0);
+  });
+
+  test("должен корректно обрабатывать дробные числа", () => {
+    expect(getSumOfRange([0.5, 5.5, 10.5])).toBe(6); // 0.5 + 5.5 = 6
   });
 });
