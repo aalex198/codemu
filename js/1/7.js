@@ -22,9 +22,18 @@ function stringToArray(string) {
 }
 
 // №2 Дано некоторое число: 12345. Получите массив цифр этого числа.
+function numToArray(number) {
+  if (typeof number !== "number" || !Number.isFinite(number)) {
+    throw new TypeError("Аргумент должен быть числом!");
+  }
+
+  // return number.toString().split("").map(Number);
+  // return Array.from(number.toString(), Number);
+  return [...number.toString()].map(digit => +digit);
+}
 
 // №3 Дано некоторое число: 12345. Переверните его: 54321
 
 // №4 Дано некоторое число: 12345. Найдите сумму цифр этого числа.
 
-module.exports = { stringToArray };
+module.exports = { stringToArray, numToArray };
