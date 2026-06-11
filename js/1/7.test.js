@@ -1,4 +1,4 @@
-const { stringToArray, numToArray } = require("./7.js");
+const { stringToArray, numToArray, reverseDigit } = require("./7.js");
 
 describe("stringToArray", () => {
   test("Строки", () => {
@@ -34,5 +34,26 @@ describe("numToArray", () => {
     expect(() => numToArray(false)).toThrow(TypeError("Аргумент должен быть числом!"));
     expect(() => numToArray(true)).toThrow(TypeError("Аргумент должен быть числом!"));
     expect(() => numToArray("")).toThrow(TypeError("Аргумент должен быть числом!"));
+  });
+});
+
+describe("reverseDigit", () => {
+  test("Числа", () => {
+    expect(reverseDigit(123)).toEqual(321);
+    expect(reverseDigit(0)).toEqual(0);
+    expect(reverseDigit(1)).toEqual(1);
+  });
+
+  test("не число в аргументе — ошибка", () => {
+    expect(() => reverseDigit("123")).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => reverseDigit()).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => reverseDigit(null)).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => reverseDigit(NaN)).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => reverseDigit(Infinity)).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => reverseDigit({})).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => reverseDigit([])).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => reverseDigit(false)).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => reverseDigit(true)).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => reverseDigit("")).toThrow(TypeError("Аргумент должен быть числом!"));
   });
 });

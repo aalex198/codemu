@@ -33,7 +33,22 @@ function numToArray(number) {
 }
 
 // №3 Дано некоторое число: 12345. Переверните его: 54321
+function reverseDigit(num) {
+  if (typeof num !== "number" || !Number.isFinite(num)) {
+    throw new TypeError("Аргумент должен быть числом!");
+  }
+
+  // const numberString = num.toString();
+  // let reversed = "";
+
+  // for (let i = numberString.length - 1; i >= 0; i--) {
+  //   reversed += numberString[i];
+  // }
+
+  // return Number(reversed);
+  return +num.toString().split("").reverse().join("");
+}
 
 // №4 Дано некоторое число: 12345. Найдите сумму цифр этого числа.
 
-module.exports = { stringToArray, numToArray };
+module.exports = { stringToArray, numToArray, reverseDigit };
