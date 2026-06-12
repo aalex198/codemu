@@ -1,4 +1,4 @@
-const { stringToArray, numToArray, reverseDigit } = require("./7.js");
+const { stringToArray, numToArray, reverseDigit, sumDigits } = require("./7.js");
 
 describe("stringToArray", () => {
   test("Строки", () => {
@@ -55,5 +55,32 @@ describe("reverseDigit", () => {
     expect(() => reverseDigit(false)).toThrow(TypeError("Аргумент должен быть числом!"));
     expect(() => reverseDigit(true)).toThrow(TypeError("Аргумент должен быть числом!"));
     expect(() => reverseDigit("")).toThrow(TypeError("Аргумент должен быть числом!"));
+  });
+});
+
+describe("sumDigits", () => {
+  test("Числа", () => {
+    expect(sumDigits(12)).toBe(3);
+    expect(sumDigits(99)).toBe(18);
+    expect(sumDigits(123)).toBe(6);
+    expect(sumDigits(0)).toBe(0);
+    expect(sumDigits(1)).toBe(1);
+  });
+
+  test("отрицательное число — ошибка", () => {
+    expect(() => sumDigits(-2)).toThrow(Error("Число должно быть положительным!"));
+  });
+
+  test("не число в аргументе — ошибка", () => {
+    expect(() => sumDigits("123")).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => sumDigits()).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => sumDigits(null)).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => sumDigits(NaN)).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => sumDigits(Infinity)).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => sumDigits({})).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => sumDigits([])).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => sumDigits(false)).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => sumDigits(true)).toThrow(TypeError("Аргумент должен быть числом!"));
+    expect(() => sumDigits("")).toThrow(TypeError("Аргумент должен быть числом!"));
   });
 });

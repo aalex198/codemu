@@ -50,5 +50,18 @@ function reverseDigit(num) {
 }
 
 // №4 Дано некоторое число: 12345. Найдите сумму цифр этого числа.
+function sumDigits(number) {
+  if (typeof number !== "number" || !Number.isFinite(number)) {
+    throw new TypeError("Аргумент должен быть числом!");
+  }
 
-module.exports = { stringToArray, numToArray, reverseDigit };
+  if (number < 0) {
+    throw new Error("Число должно быть положительным!");
+  }
+
+  return Array.from(digit.toString()).reduce((sum, digit) => {
+    return (sum += +digit);
+  }, 0);
+}
+
+module.exports = { stringToArray, numToArray, reverseDigit, sumDigits };
