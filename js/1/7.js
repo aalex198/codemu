@@ -59,7 +59,7 @@ function sumDigits(number) {
     throw new Error("Число должно быть положительным!");
   }
 
-  return Array.from(digit.toString()).reduce((sum, digit) => {
+  return Array.from(number.toString()).reduce((sum, digit) => {
     return (sum += +digit);
   }, 0);
 }
