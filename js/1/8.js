@@ -43,5 +43,23 @@ function getRangeOfNaturalDigit(start, end) {
 }
 
 // №3 Дан массив с дробями: [1.456, 2.125, 3.32, 4.1, 5.34]. Округлите эти дроби до одного знака в дробной части.
+function roundToFirstDecimal(numbers) {
+  if (!Array.isArray(numbers) || numbers.length === 0) {
+    throw new TypeError("Аргумент должен быть массивом чисел");
+  }
+  return numbers.map((number, index, nums) => {
+    if (typeof number !== "number" || !Number.isFinite(number)) {
+      throw new TypeError(
+        `Элемент "${number}" массива "${nums}" индексом "${index}" должен быть конечным числом! А его тип - "${typeof number}"`
+      );
+    }
+    const [integer, fraction = ""] = number.toString().split(".");
+    if (!fraction || fraction.length === 1) return number;
 
-module.exports = { getFilledNumsArray, getRangeOfNaturalDigit };
+    return Number(integer + "." + fraction[0]);
+
+    // return Math.trunc(number * 10) / 10;
+  });
+}
+
+module.exports = { getFilledNumsArray, getRangeOfNaturalDigit, roundToFirstDecimal };
