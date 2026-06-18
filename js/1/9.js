@@ -13,7 +13,20 @@ function filterUrls(urls, startParam = "http://") {
 }
 
 // №2 Дан массив со строками. Оставьте в этом массиве только те строки, которые заканчиваются на .html.
+function filterFilesOnExtensions(extensions, findExtension = ".html") {
+  if (!Array.isArray(extensions)) {
+    throw new TypeError("Аргумент должен быть массивом");
+  }
+
+  return extensions.filter(extension => {
+    if (typeof extension !== "string") {
+      throw new TypeError("Массив должен состоять только из строк");
+    }
+
+    return extension.endsWith(findExtension);
+  });
+}
 
 // №3 Дан массив с числами. Увеличьте каждое число из массива на 10 процентов.
 
-module.exports = { filterUrls };
+module.exports = { filterUrls, filterFilesOnExtensions };
