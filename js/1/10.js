@@ -1,7 +1,31 @@
 // №1 Заполните массив случайными числами из промежутка от 1 до 100.
+function setRandomRange(from, to) {
+  if (typeof from !== "number" || !Number.isFinite(from)) {
+    throw new Error("Первый аргумент должен быть числом");
+  }
+  if (typeof to !== "number" || !Number.isFinite(to)) {
+    throw new Error("Второй аргумент должен быть числом");
+  }
+
+  if (from >= to) {
+    throw new Error(`Некорректный диапазон аргументов. "${from}" должен быть меньше "${to}"`);
+  }
+
+  let randomDigits = [];
+
+  for (let i = from; i <= to; i++) {
+    if (Math.random > 0.5) {
+      randomDigits.push(i);
+    }
+  }
+
+  return randomDigits;
+}
 
 // №2 Дано некоторое число: 12345. Выведите в консоль все его символы с конца.
 
 // №3 Дан некоторый массив, например, вот такой: [1, 2, 3, 4, 5, 6]. По очереди выведите в консоль подмассивы из двух элементов нашего массива: [1, 2] [3, 4] [5, 6]
 
 // №4 Даны два массива: let arr1 = [1, 2, 3]; let arr2 = [4, 5, 6]; Слейте эти массивы в новый массив: [1, 2, 3, 4, 5, 6]
+
+module.exports = { setRandomRange };
