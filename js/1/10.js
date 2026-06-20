@@ -23,9 +23,20 @@ function setRandomRange(from, to) {
 }
 
 // №2 Дано некоторое число: 12345. Выведите в консоль все его символы с конца.
+function logDigitsReversed(number) {
+  if (typeof number !== "number" || !Number.isFinite(number)) {
+    throw new Error("Аргумент должен быть конечным числом!")
+  } 
+
+  const strNum = Math.abs(number).toString();
+
+  for (let i = strNum.length - 1; i >= 0 ; i--) {
+    console.log(strNum[i])
+  }
+}
 
 // №3 Дан некоторый массив, например, вот такой: [1, 2, 3, 4, 5, 6]. По очереди выведите в консоль подмассивы из двух элементов нашего массива: [1, 2] [3, 4] [5, 6]
 
 // №4 Даны два массива: let arr1 = [1, 2, 3]; let arr2 = [4, 5, 6]; Слейте эти массивы в новый массив: [1, 2, 3, 4, 5, 6]
 
-module.exports = { setRandomRange };
+module.exports = { setRandomRange, logDigitsReversed };
