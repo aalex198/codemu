@@ -1,4 +1,4 @@
-const { setRandomRange, logDigitsReversed } = require("./10.js");
+const { setRandomRange, logDigitsReversed, logSubarrays, mergeArrays } = require("./10.js");
 
 describe("setRandomRange", () => {
   test("from — не число (строка)", () => {
@@ -101,16 +101,13 @@ describe("setRandomRange", () => {
   });
 });
 
-
 describe("logDigitsReversed", () => {
   let consoleSpy;
 
-  // Перед каждым тестом перехватываем вызовы console.log
   beforeEach(() => {
     consoleSpy = jest.spyOn(console, "log").mockImplementation(() => {});
   });
 
-  // После каждого теста возвращаем console.log в исходное состояние
   afterEach(() => {
     consoleSpy.mockRestore();
   });
@@ -118,10 +115,8 @@ describe("logDigitsReversed", () => {
   test("должна выводить цифры обычного числа с конца", () => {
     logDigitsReversed(12345);
 
-    // Проверяем, сколько раз вызвался console.log
     expect(consoleSpy).toHaveBeenCalledTimes(5);
-    
-    // Проверяем точный порядок вывода в консоль
+
     expect(consoleSpy.mock.calls[0][0]).toBe("5");
     expect(consoleSpy.mock.calls[1][0]).toBe("4");
     expect(consoleSpy.mock.calls[2][0]).toBe("3");
@@ -137,11 +132,11 @@ describe("logDigitsReversed", () => {
 
   test("должна игнорировать знак минус для отрицательных чисел", () => {
     logDigitsReversed(-987);
-    
+
     expect(consoleSpy).toHaveBeenCalledTimes(3);
     expect(consoleSpy.mock.calls[0][0]).toBe("7");
     expect(consoleSpy.mock.calls[1][0]).toBe("8");
-    expect(consoleSpy.mock.calls[2][0]).toBe("9"); // Минус не должен выводиться
+    expect(consoleSpy.mock.calls[2][0]).toBe("9");
   });
 
   test("должна выбрасывать ошибку, если передан не числовой тип данных", () => {
@@ -153,5 +148,57 @@ describe("logDigitsReversed", () => {
   test("должна выбрасывать ошибку для бесконечных чисел или NaN", () => {
     expect(() => logDigitsReversed(Infinity)).toThrow("Аргумент должен быть конечным числом!");
     expect(() => logDigitsReversed(NaN)).toThrow("Аргумент должен быть конечным числом!");
+  });
+});
+
+describe("mergeArrays", () => {
+  test("сливает два непустых массива", () => {
+    expect(mergeArrays([1, 2, 3], [4, 5, 6])).toEqual([1, 2, 3, 4, 5, 6]);
+  });
+
+  test("сливает массив с пустым массивом", () => {
+    expect(mergeArrays([1, 2, 3], [])).toEqual([1, 2, 3]);
+    expect(mergeArrays([], [4, 5, 6])).toEqual([4, 5, 6]);
+  });
+
+  test("сливает два пустых массива", () => {
+    expect(mergeArrays([], [])).toEqual([]);
+  });
+
+  test("сливает массивы с разными типами данных", () => {
+    expect(mergeArrays([1, "a", true], [null, undefined, { key: "val" }])).toEqual([
+      1,
+      "a",
+      true,
+      null,
+      undefined,
+      { key: "val" },
+    ]);
+  });
+
+  test("не мутирует исходные массивы", () => {
+    const arr1 = [1, 2, 3];
+    const arr2 = [4, 5, 6];
+    const copy1 = [...arr1];
+    const copy2 = [...arr2];
+
+    mergeArrays(arr1, arr2);
+
+    expect(arr1).toEqual(copy1);
+    expect(arr2).toEqual(copy2);
+  });
+
+  test("выбрасывает TypeError, если первый аргумент не массив", () => {
+    expect(() => mergeArrays("not array", [1, 2])).toThrow(TypeError);
+    expect(() => mergeArrays(null, [1, 2])).toThrow(TypeError);
+    expect(() => mergeArrays(undefined, [1, 2])).toThrow(TypeError);
+    expect(() => mergeArrays(123, [1, 2])).toThrow(TypeError);
+  });
+
+  test("выбрасывает TypeError, если второй аргумент не массив", () => {
+    expect(() => mergeArrays([1, 2], "not array")).toThrow(TypeError);
+    expect(() => mergeArrays([1, 2], null)).toThrow(TypeError);
+    expect(() => mergeArrays([1, 2], undefined)).toThrow(TypeError);
+    expect(() => mergeArrays([1, 2], 123)).toThrow(TypeError);
   });
 });
