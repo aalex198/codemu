@@ -55,3 +55,26 @@ const removeElementsWithMutation: TRemoveElementsWithMutation = (arr, removeElem
 };
 
 // №4 Дан некоторый массив, например, вот такой: [1, 2, 3, 4, 5, 6]. Найдите сумму первой половины элементов этого массива.
+function getFirstPathSum(nums: number[]): number {
+  if (!Array.isArray(nums)) {
+    throw new TypeError("Аргумент должен быть массивом");
+  }
+
+  if (nums.length === 0) {
+    return 0;
+  }
+
+  let summ = 0;
+
+  for (let i = 0; i < Math.ceil(nums.length / 2); i++) {
+    if (typeof nums[i] !== "number" || !Number.isFinite(nums[i])) {
+      throw new Error(
+        `Элемент ${nums[i]} массива ${nums} должен быть числом. Его текущий тип - ${typeof nums[i]}`
+      );
+    }
+
+    summ += nums[i];
+  }
+
+  return summ;
+}
