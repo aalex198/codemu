@@ -44,15 +44,14 @@ function removeElements<T>(arr: T[], removeElement: T): T[] {
 }
 
 // Мутабельный
-type TRemoveElementsWithMutation<T> = (arr: T[], removeElem: T) => void;
-const removeElementsWithMutation: TRemoveElementsWithMutation = (arr, removeElement) => {
-  for (let i = 0; i <= arr.length; i++) {
+function removeElementsWithMutation<T>(arr: T[], removeElement: T): void {
+  for (let i = 0; i < arr.length; i++) {
     if (arr[i] === removeElement) {
       arr.splice(i, 1);
       i--;
     }
   }
-};
+}
 
 // №4 Дан некоторый массив, например, вот такой: [1, 2, 3, 4, 5, 6]. Найдите сумму первой половины элементов этого массива.
 function getFirstPathSum(nums: number[]): number {
